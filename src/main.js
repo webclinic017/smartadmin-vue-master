@@ -18,3 +18,21 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+router.beforeEach((to, from, next) => {
+  window.document.title = to.meta.title == undefined?'默认标题':to.meta.title
+  if (to.meta.requireAuth) {
+    let token = Cookies.get('access_token');
+    let anonymous = Cookies.get('user_name');
+    if (token) {
+
+      next({
+        path: '/login',
+        query: {
+          redirect: to.fullPath
+        }
+      })
+
+    }
+  }
+  next();
+})

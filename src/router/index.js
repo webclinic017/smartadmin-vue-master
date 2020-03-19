@@ -21,6 +21,10 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
+      meta:{
+        title:"登录页面",
+        keepAlive: true,
+      },
       component: Login
     }
   ]
